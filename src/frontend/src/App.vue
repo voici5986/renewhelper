@@ -171,8 +171,9 @@ const messages = {
         lblTopic: '主题 (Topic)', readOnly: '只读',
         lblNotifyTime: '提醒时间', btnResetToken: '重置令牌',
         lblHeaders: '请求头 (JSON)', lblBody: '消息体 (JSON)',
-        tag: { alert: '触发提醒', renew: '自动续期', disable: '自动禁用', normal: '检查正常' }, tagLatest: '最新', tagAuto: '自动', tagManual: '手动', msg: { confirmRenew: '确认将 [%s] 的更新日期设置为今天吗？', renewSuccess: '续期成功！日期已更新: %s -> %t', tokenReset: '令牌已重置，请更新订阅地址', copyOk: '链接已复制', exportSuccess: '备份已下载', importSuccess: '数据恢复成功，即将刷新', importFail: '导入失败，请检查文件格式', passReq: '请输入密码', saved: '保存成功', saveFail: '保存失败', cleared: '已清空', clearFail: '清空失败', loginFail: '验证失败', loadLogFail: '日志加载失败', confirmDel: '确认删除此项目?', dateError: '上次更新日期不能早于创建日期', nameReq: '服务名称不能为空', nameExist: '服务名称已存在', futureError: '上次续期不能是未来时间', serviceDisabled: '服务已停用', serviceEnabled: '服务已启用', execFinish: '执行完毕!', rateFallback: 'API请求失败，已使用默认汇率' }, tags: '标签', tagPlaceholder: '输入标签回车创建', searchPlaceholder: '搜索标题或备注...', tagsCol: '标签', tagAll: '全部', useLunar: '农历周期', lunarTip: '按农历日期计算周期', yes: '是', no: '否', timezone: '偏好时区', disabledFilter: '已停用', policyConfig: '自动化策略', policyNotify: '提醒提前天数', policyAuto: '自动续期', policyRenewDay: '过期续期天数', useGlobal: '全局默认', autoRenewOnDesc: '过期自动续期', autoRenewOffDesc: '过期自动禁用', previewCalc: '根据上次续期日期和周期计算', nextDue: '下次到期', typeRepeat: '固定重复',
+        tag: { alert: '触发提醒', renew: '自动续期', disable: '自动禁用', normal: '检查正常' }, tagLatest: '最新', tagAuto: '自动', tagManual: '手动', msg: { confirmRenew: '确认将 [%s] 的更新日期设置为今天吗？', renewSuccess: '续期成功！日期已更新: %s -> %t', tokenReset: '令牌已重置，请更新订阅地址', copyOk: '链接已复制', exportSuccess: '备份已下载', importSuccess: '数据恢复成功，即将刷新', importFail: '导入失败，请检查文件格式', passReq: '请输入密码', saved: '保存成功', saveFail: '保存失败', cleared: '已清空', clearFail: '清空失败', loginFail: '验证失败', loadLogFail: '日志加载失败', confirmDel: '确认删除此项目?', dateError: '上次更新日期不能早于创建日期', nameReq: '服务名称不能为空', nameExist: '服务名称已存在', futureError: '上次续期不能是未来时间', serviceDisabled: '服务已停用', serviceEnabled: '服务已启用', execFinish: '执行完毕!', rateFallback: 'API请求失败，已使用默认汇率', invalidUrl: '请输入有效的URL链接' }, tags: '标签', tagPlaceholder: '输入标签回车创建', searchPlaceholder: '搜索标题或备注...', tagsCol: '标签', tagAll: '全部', useLunar: '农历周期', lunarTip: '按农历日期计算周期', yes: '是', no: '否', timezone: '偏好时区', disabledFilter: '已停用', policyConfig: '自动化策略', policyNotify: '提醒提前天数', policyAuto: '自动续期', policyRenewDay: '过期续期天数', useGlobal: '全局默认', autoRenewOnDesc: '过期自动续期', autoRenewOffDesc: '过期自动禁用', previewCalc: '根据上次续期日期和周期计算', nextDue: '下次到期', typeRepeat: '固定重复',
         fixedPrice: '账单额', currency: '币种', defaultCurrency: '默认币种', history: '历史记录', historyTitle: '续费历史', totalCost: '总花费', totalCount: '续费次数', renewDate: '操作日期', billPeriod: '账单周期', startDate: '开始日期', endDate: '结束日期', actualPrice: '实付金额', notePlaceholder: '可选备注...', btnAddHist: '补录历史', modify: '修改渠道', confirmDelHist: '删除此记录?', opDate: '操作日', amount: '金额', period: '周期', spendingDashboard: '花销看板', monthlyBreakdown: '月度明细', total: '总计', count: '笔', growth: '环比', currMonth: '本月', avgMonthlyLabel: '月均支出', itemDetails: '项目明细', noData: '暂无数据', predictedTag: '预测', last12M: '最近12个月', lblPushTitle: '自定义标题', pushTitle: 'RenewHelper 报告',
+        renewUrl: '续费链接', renewUrlPlaceholder: 'https://example.com/renew', goRenew: '去续费',
         addChannel: '添加渠道', noChannels: '暂无推送渠道，请点击右上角添加。', modifyChannel: '配置渠道', channelType: '渠道类型', channelName: '渠道名称 (备注)', selectChannels: '选择推送渠道 (留空则默认推送所有)', delete: '删除'
     },
     en: {
@@ -183,8 +184,9 @@ const messages = {
         lblTopic: 'Topic', readOnly: 'Read-only',
         lblNotifyTime: 'Alarm Time', btnResetToken: 'RESET TOKEN',
         lblHeaders: 'Headers (JSON)', lblBody: 'Body (JSON)',
-        tag: { alert: 'ALERT', renew: 'RENEWED', disable: 'DISABLED', normal: 'NORMAL' }, tagLatest: 'LATEST', tagAuto: 'AUTO', tagManual: 'MANUAL', msg: { confirmRenew: 'Renew [%s] to today based on your timezone?', renewSuccess: 'Renewed! Date updated: %s -> %t', tokenReset: 'Token Reset. Update your calendar apps.', copyOk: 'Link Copied', exportSuccess: 'Backup Downloaded', importSuccess: 'Restore Success, Refreshing...', importFail: 'Import Failed, Check File Format', passReq: 'Password Required', saved: 'Data Saved', saveFail: 'Save Failed', cleared: 'Cleared', clearFail: 'Clear Failed', loginFail: 'Access Denied', loadLogFail: 'Load Failed', confirmDel: 'Confirm Delete?', dateError: 'Last renew date cannot be earlier than create date', nameReq: 'Name Required', nameExist: 'Name already exists', futureError: 'Renew date cannot be in the future', serviceDisabled: 'Service Disabled', serviceEnabled: 'Service Enabled', execFinish: 'EXECUTION FINISHED!', rateFallback: 'Network Error. Used default rates.' }, tags: 'TAGS', tagPlaceholder: 'Press Enter to create tag', searchPlaceholder: 'Search...', tagsCol: 'TAGS', tagAll: 'ALL', useLunar: 'LUNAR', lunarTip: 'Calculate based on Lunar calendar', yes: 'Yes', no: 'No', timezone: 'Timezone', disabledFilter: 'DISABLED', policyConfig: 'Policy Config', policyNotify: 'NOTIFY DAYS', policyAuto: 'AUTO RENEW', policyRenewDay: 'RENEW DAYS', useGlobal: 'Global Default', autoRenewOnDesc: 'Auto Renew when overdue', autoRenewOffDesc: 'Auto Disable when overdue', previewCalc: 'Based on Last Renew Date & Interval', nextDue: 'NEXT DUE', typeRepeat: 'REPEAT',
+        tag: { alert: 'ALERT', renew: 'RENEWED', disable: 'DISABLED', normal: 'NORMAL' }, tagLatest: 'LATEST', tagAuto: 'AUTO', tagManual: 'MANUAL', msg: { confirmRenew: 'Renew [%s] to today based on your timezone?', renewSuccess: 'Renewed! Date updated: %s -> %t', tokenReset: 'Token Reset. Update your calendar apps.', copyOk: 'Link Copied', exportSuccess: 'Backup Downloaded', importSuccess: 'Restore Success, Refreshing...', importFail: 'Import Failed, Check File Format', passReq: 'Password Required', saved: 'Data Saved', saveFail: 'Save Failed', cleared: 'Cleared', clearFail: 'Clear Failed', loginFail: 'Access Denied', loadLogFail: 'Load Failed', confirmDel: 'Confirm Delete?', dateError: 'Last renew date cannot be earlier than create date', nameReq: 'Name Required', nameExist: 'Name already exists', futureError: 'Renew date cannot be in the future', serviceDisabled: 'Service Disabled', serviceEnabled: 'Service Enabled', execFinish: 'EXECUTION FINISHED!', rateFallback: 'Network Error. Used default rates.', invalidUrl: 'Please enter a valid URL' }, tags: 'TAGS', tagPlaceholder: 'Press Enter to create tag', searchPlaceholder: 'Search...', tagsCol: 'TAGS', tagAll: 'ALL', useLunar: 'LUNAR', lunarTip: 'Calculate based on Lunar calendar', yes: 'Yes', no: 'No', timezone: 'Timezone', disabledFilter: 'DISABLED', policyConfig: 'Policy Config', policyNotify: 'NOTIFY DAYS', policyAuto: 'AUTO RENEW', policyRenewDay: 'RENEW DAYS', useGlobal: 'Global Default', autoRenewOnDesc: 'Auto Renew when overdue', autoRenewOffDesc: 'Auto Disable when overdue', previewCalc: 'Based on Last Renew Date & Interval', nextDue: 'NEXT DUE', typeRepeat: 'REPEAT',
         fixedPrice: 'PRICE', currency: 'CURRENCY', defaultCurrency: 'DEFAULT CURRENCY', history: 'History', historyTitle: 'Renewal History', totalCost: 'Total Cost', totalCount: 'Total Count', renewDate: 'Op Date', billPeriod: 'Bill Period', startDate: 'Start Date', endDate: 'End Date', actualPrice: 'Actual Price', notePlaceholder: 'Optional note...', btnAddHist: 'Add Record', modify: 'Edit Channel', confirmDelHist: 'Delete record?', opDate: 'Op Date', amount: 'Amount', period: 'Period', spendingDashboard: 'SPENDING DASHBOARD', monthlyBreakdown: 'MONTHLY BREAKDOWN', total: 'TOTAL', count: 'COUNT', growth: 'GROWTH', currMonth: 'CURRENT', itemDetails: 'ITEMS', noData: 'NO DATA', predictedTag: 'PREDICTED', lblPushTitle: 'Push Title', pushTitle: 'RenewHelper Report',
+        renewUrl: 'RENEW URL', renewUrlPlaceholder: 'https://example.com/renew', goRenew: 'RENEW',
         addChannel: 'Add Channel', noChannels: 'No channels. Add one!', modifyChannel: 'Edit Channel', channelType: 'Type', channelName: 'Name', selectChannels: 'NOTIFICATION CHANNELS (Leave empty for All)', delete: 'Delete'
     }
 };
@@ -247,6 +249,18 @@ const calculateCycleEndDate = (startDateStr, item) => {
     return null;
 };
 
+const isSafeHttpUrl = (val) => {
+    if (!val || typeof val !== 'string') return false;
+    const trimmed = val.trim();
+    if (!/^https?:\/\//i.test(trimmed)) return false;
+    try {
+        const parsed = new URL(trimmed);
+        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+    } catch {
+        return false;
+    }
+};
+
 const isLoggedIn = ref(!!localStorage.getItem('jwt_token')), password = ref(''), loading = ref(false), list = ref([]), settings = ref({ upcomingBillsDays: 7 });
 const dataVersion = ref(0); // 新增版本号状态
 const hasNewVersion = ref(false); // 版本更新提示
@@ -254,12 +268,12 @@ const newVersionCode = ref('');
 const dialogVisible = ref(false), settingsVisible = ref(false), historyVisible = ref(false), historyLoading = ref(false), historyLogs = ref([]);
 const checking = ref(false), logs = ref([]), displayLogs = ref([]), isEdit = ref(false), lang = ref('zh'), currentTag = ref(''), searchKeyword = ref('');
 const currentView = ref('project');
-const calendarMonth = ref((() => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); })());
+const calendarMonth = ref((() => { try { const tz = settings.value?.timezone || 'UTC'; const s = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); return s.substring(0, 7); } catch (e) { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); } })());
 // el-calendar 日历视图状态
 const calendarDate = ref(new Date());
 const calendarRef = ref(null);
 const calendarYearRange = computed(() => {
-    const cur = new Date().getFullYear();
+    const cur = parseInt(getLocalToday().substring(0, 4));
     return Array.from({ length: 5 }, (_, i) => cur - 2 + i);
 });
 const calendarSelectedYear = computed({
@@ -270,7 +284,7 @@ const calendarSelectedMonth = computed({
     get: () => calendarDate.value.getMonth() + 1,
     set: (m) => { const d = new Date(calendarDate.value); d.setMonth(m - 1); calendarDate.value = d; }
 });
-const goCalendarToday = () => { calendarDate.value = new Date(); };
+const goCalendarToday = () => { const p = getLocalToday().split('-').map(Number); calendarDate.value = new Date(p[0], p[1] - 1, p[2]); };
 // 按日期索引的事件映射 { 'YYYY-MM-DD': [item, ...] }
 const calendarEvents = computed(() => {
     const map = {};
@@ -291,11 +305,10 @@ const calendarEvents = computed(() => {
             isProjected
         });
     };
-    // 推算截止日期：明年同月底
+    // 推算截止日期：明年同月底 (UTC)
     const now = new Date();
-    const endLimit = new Date(now.getFullYear() + 1, now.getMonth() + 1, 0);
-    const parseYMD = (s) => { const p = s.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); };
-    const fmtDate = (d) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    const endLimit = new Date(Date.UTC(now.getUTCFullYear() + 1, now.getUTCMonth() + 1, 0));
+    const fmtDate = (d) => d.getUTCFullYear() + '-' + String(d.getUTCMonth() + 1).padStart(2, '0') + '-' + String(d.getUTCDate()).padStart(2, '0');
 
     list.value.forEach(item => {
         if (item.enabled === false) return;
@@ -322,12 +335,14 @@ const calendarEvents = computed(() => {
                         const advStr = fmtDate(cursor);
                         nextObj = frontendCalc.calcNextRepeatDate(item.repeat, advStr, item.createDate || item.lastRenewDate);
                         if (!nextObj) break;
+                        // Guard: if nextObj did not advance past cursor, stop to prevent infinite loop
+                        if (nextObj.getTime() <= cursor.getTime()) break;
                     } catch (e) { break; }
                 } else {
-                    nextObj = new Date(cursor);
-                    if (unit === 'year') nextObj.setFullYear(nextObj.getFullYear() + val);
-                    else if (unit === 'month') nextObj.setMonth(nextObj.getMonth() + val);
-                    else nextObj.setDate(nextObj.getDate() + val);
+                    nextObj = new Date(cursor.getTime());
+                    if (unit === 'year') nextObj.setUTCFullYear(nextObj.getUTCFullYear() + val);
+                    else if (unit === 'month') nextObj.setUTCMonth(nextObj.getUTCMonth() + val);
+                    else nextObj.setUTCDate(nextObj.getUTCDate() + val);
                 }
                 if (nextObj > endLimit) break;
                 addEvent(fmtDate(nextObj), item, true);
@@ -337,12 +352,10 @@ const calendarEvents = computed(() => {
     });
     return map;
 });
-// 格式化日期为 YYYY-MM-DD 字符串
+// 格式化日期为 YYYY-MM-DD 字符串（基于用户偏好时区）
 const formatDateKey = (date) => {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, '0');
-    const d = String(date.getDate()).padStart(2, '0');
-    return `${y}-${m}-${d}`;
+    const tz = settings.value?.timezone || 'UTC';
+    return new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(date);
 };
 const getCalendarDayEvents = (date) => calendarEvents.value[formatDateKey(date)] || [];
 const isCalendarToday = (date) => formatDateKey(date) === formatDateKey(new Date());
@@ -359,7 +372,7 @@ const normalizeNotifyTime = (val) => {
 };
 // 提醒时间选项列表 (00:00~23:30 每30分钟)
 const notifyTimeOptions = Array.from({ length: 48 }, (_, i) => { const h = String(Math.floor(i / 2)).padStart(2, '0'); const m = i % 2 === 0 ? '00' : '30'; return `${h}:${m}`; });
-const form = ref({ id: '', name: '', createDate: '', lastRenewDate: '', intervalDays: 30, cycleUnit: 'day', type: 'cycle', message: '', enabled: true, tags: [], useLunar: false, notifyDays: 3, notifyTime: ['08:00'], autoRenew: true, autoRenewDays: 3, fixedPrice: 0, currency: 'CNY', notifyChannelIds: [], renewHistory: [] });
+const form = ref({ id: '', name: '', createDate: '', lastRenewDate: '', intervalDays: 30, cycleUnit: 'day', type: 'cycle', message: '', enabled: true, tags: [], useLunar: false, notifyDays: 3, notifyTime: ['08:00'], autoRenew: true, autoRenewDays: 3, fixedPrice: 0, currency: 'CNY', notifyChannelIds: [], renewHistory: [], renewUrl: '' });
 const settingsForm = ref({
     notifyUrl: '',
     enableNotify: true,
@@ -591,8 +604,9 @@ const totalAmount = computed(() => calculateTotal(list.value));
 // Spending Stats (Refactored: Fix Year Range & Project Details)
 const spendingStats = computed(() => {
     const defaultCur = settings.value.defaultCurrency || 'CNY';
-    const now = new Date();
-    const currentMonthKey = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+    const todayParts = getLocalToday().split('-').map(Number);
+    const nowY = todayParts[0], nowM = todayParts[1];
+    const currentMonthKey = nowY + '-' + String(nowM).padStart(2, '0');
     const rates = exchangeRates.value || {};
     const convert = (p, c) => (c !== defaultCur && rates[c]) ? p / rates[c] : p;
 
@@ -601,8 +615,10 @@ const spendingStats = computed(() => {
     const sel = selectedYear.value;
     if (sel === 'recent') {
         for (let i = 11; i >= 0; i--) {
-            const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-            monthKeys.push(d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'));
+            const tm = nowM - 1 - i;
+            const y = nowY + Math.floor(tm / 12);
+            const m = ((tm % 12) + 12) % 12 + 1;
+            monthKeys.push(y + '-' + String(m).padStart(2, '0'));
         }
     } else {
         const y = parseInt(sel);
@@ -612,7 +628,7 @@ const spendingStats = computed(() => {
     }
 
     // 【修改 1】年度范围：仅保留今年、去年、前年 (去除明年)
-    const yearKeys = [now.getFullYear() - 2, now.getFullYear() - 1, now.getFullYear()];
+    const yearKeys = [nowY - 2, nowY - 1, nowY];
 
     // 【修改 2】增加 details 字段用于存储明细
     const data = {
@@ -707,11 +723,11 @@ const spendingStats = computed(() => {
             const val = parseInt(item.intervalDays) || 1;
 
             for (let i = 0; i < 366; i++) {
-                const y = nextStart.getFullYear();
+                const y = nextStart.getUTCFullYear();
                 if (y > maxYear) break;
 
-                const mm = nextStart.getMonth() + 1;
-                const dd = nextStart.getDate();
+                const mm = nextStart.getUTCMonth() + 1;
+                const dd = nextStart.getUTCDate();
                 const dateStr = y + '-' + String(mm).padStart(2, '0') + '-' + String(dd).padStart(2, '0');
 
                 // 计算该周期的结束日 (用于 UI 显示)
@@ -719,7 +735,7 @@ const spendingStats = computed(() => {
                 if (isRepeat) {
                     // Repeat 模式：用 calcNextRepeatDate 推算下一个周期
                     try {
-                        const advStr = nextStart.getFullYear() + '-' + String(nextStart.getMonth() + 1).padStart(2, '0') + '-' + String(nextStart.getDate()).padStart(2, '0');
+                        const advStr = nextStart.getUTCFullYear() + '-' + String(nextStart.getUTCMonth() + 1).padStart(2, '0') + '-' + String(nextStart.getUTCDate()).padStart(2, '0');
                         const nd = frontendCalc.calcNextRepeatDate(item.repeat, advStr, item.createDate || item.lastRenewDate);
                         if (nd) {
                             currentEndObj = nd;
@@ -729,14 +745,14 @@ const spendingStats = computed(() => {
                     } catch (e) { break; }
                 } else {
                     // Cycle/Reset 模式：固定步长推进
-                    currentEndObj = new Date(nextStart);
-                    if (unit === 'year') currentEndObj.setFullYear(currentEndObj.getFullYear() + val);
-                    else if (unit === 'month') currentEndObj.setMonth(currentEndObj.getMonth() + val);
-                    else currentEndObj.setDate(currentEndObj.getDate() + val);
+                    currentEndObj = new Date(nextStart.getTime());
+                    if (unit === 'year') currentEndObj.setUTCFullYear(currentEndObj.getUTCFullYear() + val);
+                    else if (unit === 'month') currentEndObj.setUTCMonth(currentEndObj.getUTCMonth() + val);
+                    else currentEndObj.setUTCDate(currentEndObj.getUTCDate() + val);
                 }
-                const endY = currentEndObj.getFullYear();
-                const endM = currentEndObj.getMonth() + 1;
-                const endD = currentEndObj.getDate();
+                const endY = currentEndObj.getUTCFullYear();
+                const endM = currentEndObj.getUTCMonth() + 1;
+                const endD = currentEndObj.getUTCDate();
                 const endDateStr = endY + '-' + String(endM).padStart(2, '0') + '-' + String(endD).padStart(2, '0');
 
                 if (!processedBillDates.has(dateStr)) {
@@ -781,8 +797,10 @@ const spendingStats = computed(() => {
 
     const recentMonthKeys = [];
     for (let i = 11; i >= 0; i--) {
-        const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-        recentMonthKeys.push(d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'));
+        const tm = nowM - 1 - i;
+        const ry = nowY + Math.floor(tm / 12);
+        const rm = ((tm % 12) + 12) % 12 + 1;
+        recentMonthKeys.push(ry + '-' + String(rm).padStart(2, '0'));
     }
     const calcRecentTotal = (source) => recentMonthKeys.reduce((sum, mk) => sum + (source.months[mk] || 0), 0);
 
@@ -858,17 +876,17 @@ const upcomingBillsList = computed(() => {
                 // Advance date
                 let nextDate;
                 if (i.useLunar && typeof LUNAR !== 'undefined' && typeof frontendCalc !== 'undefined') {
-                    const y = currentBaseDate.getFullYear(), m = currentBaseDate.getMonth() + 1, d = currentBaseDate.getDate();
+                    const y = currentBaseDate.getUTCFullYear(), m = currentBaseDate.getUTCMonth() + 1, d = currentBaseDate.getUTCDate();
                     const l = LUNAR.solar2lunar(y, m, d);
                     if (!l) break;
                     const nextL = frontendCalc.addPeriod({ year: l.year, month: l.month, day: l.day, isLeap: l.isLeap }, val, unit);
                     const nextS = frontendCalc.l2s(nextL);
-                    nextDate = new Date(nextS.year, nextS.month - 1, nextS.day);
+                    nextDate = new Date(Date.UTC(nextS.year, nextS.month - 1, nextS.day));
                 } else {
-                    nextDate = new Date(currentBaseDate);
-                    if (unit === 'year') nextDate.setFullYear(nextDate.getFullYear() + val);
-                    else if (unit === 'month') nextDate.setMonth(nextDate.getMonth() + val);
-                    else nextDate.setDate(nextDate.getDate() + val);
+                    nextDate = new Date(currentBaseDate.getTime());
+                    if (unit === 'year') nextDate.setUTCFullYear(nextDate.getUTCFullYear() + val);
+                    else if (unit === 'month') nextDate.setUTCMonth(nextDate.getUTCMonth() + val);
+                    else nextDate.setUTCDate(nextDate.getUTCDate() + val);
                 }
 
                 // Update base for next iteration
@@ -926,9 +944,9 @@ const filteredList = computed(() => {
         r = r.filter(row => {
             const d = row.daysLeft;
             const nd = row.nextDueDate || '';
-            const today = new Date();
-            const curY = today.getFullYear();
-            const curM = today.getMonth() + 1;
+            const todayParts = getLocalToday().split('-').map(Number);
+            const curY = todayParts[0];
+            const curM = todayParts[1];
 
             return fv.some(v => {
                 if (v === 'expired') return d <= 0;
@@ -973,15 +991,15 @@ const filteredList = computed(() => {
 
     if (filterState.value.lastRenewDate && filterState.value.lastRenewDate.length > 0) {
         const fv = filterState.value.lastRenewDate;
-        const now = new Date();
-        const todayStr = getLocalToday();
+        const todayObj = parseYMD(getLocalToday());
+        const todayY = todayObj.getUTCFullYear();
         r = r.filter(row => {
-            const rd = new Date(row.lastRenewDate);
-            const diffDays = (now - rd) / (1000 * 3600 * 24);
+            const rd = parseYMD(row.lastRenewDate);
+            const diffDays = (todayObj - rd) / (1000 * 3600 * 24);
             return fv.some(v => {
                 if (v === 'm1') return diffDays <= 30;
                 if (v === 'm6') return diffDays <= 180;
-                if (v === 'year') return rd.getFullYear() === now.getFullYear();
+                if (v === 'year') return rd.getUTCFullYear() === todayY;
                 if (v === 'earlier') return diffDays > 180;
                 return false;
             });
@@ -1232,6 +1250,7 @@ const saveItem = async () => {
     if (list.value.some(i => i.name.toLowerCase() === form.value.name.toLowerCase() && i.id !== form.value.id)) return ElMessage.error(t('msg.nameExist'));
     if (form.value.lastRenewDate < form.value.createDate) return ElMessage.error(t('msg.dateError'));
     if (form.value.lastRenewDate > getLocalToday()) return ElMessage.error(t('msg.futureError'));
+    if (form.value.renewUrl && form.value.renewUrl.trim() && !isSafeHttpUrl(form.value.renewUrl)) return ElMessage.error(t('msg.invalidUrl'));
 
     // 新建时自动创建初始账单记录
     if (!isEdit.value && form.value.lastRenewDate && (form.value.intervalDays || form.value.type === 'repeat')) {
@@ -1247,7 +1266,7 @@ const saveItem = async () => {
         } else if (form.value.useLunar && typeof LUNAR !== 'undefined' && typeof frontendCalc !== 'undefined') {
             // 【修复】农历逻辑：先转为农历对象 -> 计算 -> 转回公历
             const d = parseYMD(startDate); // 字符串转 Date
-            const l = LUNAR.solar2lunar(d.getFullYear(), d.getMonth() + 1, d.getDate());
+            const l = LUNAR.solar2lunar(d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate());
 
             if (l) {
                 const nextL = frontendCalc.addPeriod(l, Number(form.value.intervalDays), form.value.cycleUnit || 'day');
@@ -1599,7 +1618,7 @@ const repeatUpcomingDates = computed(() => {
     } catch(e) { /* 计算异常 */ }
     return null;
 });
-const openAdd = () => { isEdit.value = false; const d = getLocalToday(); form.value = { id: Date.now().toString(), name: '', createDate: d, lastRenewDate: d, intervalDays: 30, cycleUnit: 'day', type: 'cycle', enabled: true, tags: [], useLunar: false, notifyDays: 3, notifyTime: ['08:00'], autoRenew: true, autoRenewDays: 3, fixedPrice: 0, currency: settings.value.defaultCurrency || 'CNY', notifyChannelIds: [], renewHistory: [], repeat: { freq: 'monthly', interval: 1, bymonth: [], bymonthday: [], byweekday: [], bysetpos: null, bycycleday: [] } }; dialogVisible.value = true; };
+const openAdd = () => { isEdit.value = false; const d = getLocalToday(); form.value = { id: Date.now().toString(), name: '', createDate: d, lastRenewDate: d, intervalDays: 30, cycleUnit: 'day', type: 'cycle', enabled: true, tags: [], useLunar: false, notifyDays: 3, notifyTime: ['08:00'], autoRenew: true, autoRenewDays: 3, fixedPrice: 0, currency: settings.value.defaultCurrency || 'CNY', notifyChannelIds: [], renewHistory: [], renewUrl: '', repeat: { freq: 'monthly', interval: 1, bymonth: [], bymonthday: [], byweekday: [], bysetpos: null, bycycleday: [] } }; dialogVisible.value = true; };
 const editItem = (row) => { 
     isEdit.value = true; 
     let rObj = row.repeat ? JSON.parse(JSON.stringify(row.repeat)) : { freq: 'monthly', interval: 1, bymonth: [], bymonthday: [], byweekday: [], bysetpos: null, bycycleday: [] };
@@ -1757,22 +1776,22 @@ const migrateOldData = async (skipConfirm = false) => {
 
             if (item.useLunar && typeof LUNAR !== 'undefined' && typeof frontendCalc !== 'undefined') {
                 const d = parseYMD(startDate);
-                const l = LUNAR.solar2lunar(d.getFullYear(), d.getMonth() + 1, d.getDate());
+                const l = LUNAR.solar2lunar(d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate());
                 if (l) {
                     const nextL = frontendCalc.addPeriod(l, Number(item.intervalDays), item.cycleUnit || 'day');
                     const nextS = frontendCalc.l2s(nextL);
                     endDate = `${nextS.year}-${nextS.month.toString().padStart(2, '0')}-${nextS.day.toString().padStart(2, '0')}`;
                 }
             } else {
-                const start = new Date(startDate);
+                const start = parseYMD(startDate);
                 const unit = item.cycleUnit || 'day';
                 const interval = Number(item.intervalDays) || 1;
-                if (unit === 'year') start.setFullYear(start.getFullYear() + interval);
-                else if (unit === 'month') start.setMonth(start.getMonth() + interval);
-                else start.setDate(start.getDate() + interval);
-                const y = start.getFullYear();
-                const m = (start.getMonth() + 1).toString().padStart(2, '0');
-                const d = start.getDate().toString().padStart(2, '0');
+                if (unit === 'year') start.setUTCFullYear(start.getUTCFullYear() + interval);
+                else if (unit === 'month') start.setUTCMonth(start.getUTCMonth() + interval);
+                else start.setUTCDate(start.getUTCDate() + interval);
+                const y = start.getUTCFullYear();
+                const m = (start.getUTCMonth() + 1).toString().padStart(2, '0');
+                const d = start.getUTCDate().toString().padStart(2, '0');
                 endDate = y + '-' + m + '-' + d;
             }
 
@@ -1830,7 +1849,7 @@ const getTagClass = (t) => ({ alert: 'border-red-200 text-red-600 bg-red-50', re
 const getLogColor = (a) => (a && a.includes('alert') ? 'danger' : (a && a.includes('renew') ? 'warning' : (a && a.includes('disable') ? 'info' : 'success')));
 const tableRowClassName = ({ row }) => row.enabled === false ? 'disabled-row' : '';
 
-const getLunarStr = (s) => { const d = parseYMD(s); const l = LUNAR.solar2lunar(d.getFullYear(), d.getMonth() + 1, d.getDate()); return l ? ('农历: ' + l.fullStr) : ''; };
+const getLunarStr = (s) => { const d = parseYMD(s); const l = LUNAR.solar2lunar(d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate()); return l ? ('农历: ' + l.fullStr) : ''; };
 
 
 
@@ -1976,12 +1995,27 @@ const currentRenewItem = computed(() => {
     if (!renewForm.value.id) return {};
     return list.value.find(i => i.id === renewForm.value.id) || {};
 });
+const openRenewUrl = (url) => {
+    if (!url) return;
+    if (isSafeHttpUrl(url)) {
+        window.open(url, '_blank', 'noopener');
+    } else {
+        ElMessage.warning(t('msg.invalidUrl'));
+    }
+};
 
 const openRenew = (row) => {
-    // Helper: 格式化日期 (YYYY-MM-DD)
-    const formatDate = (d) => `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`;
-    // Helper: 格式化日期时间 (YYYY-MM-DD HH:mm:ss)
-    const formatDateTime = (d) => `${formatDate(d)} ${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}:${d.getSeconds().toString().padStart(2, '0')}`;
+    // Helper: 格式化 UTC 日期为 YYYY-MM-DD
+    const formatDate = (d) => `${d.getUTCFullYear()}-${(d.getUTCMonth() + 1).toString().padStart(2, '0')}-${d.getUTCDate().toString().padStart(2, '0')}`;
+    // Helper: 格式化日期时间 (YYYY-MM-DD HH:mm:ss) 使用用户偏好时区
+    const formatDateTime = (d) => {
+        const tz = settings.value?.timezone || 'UTC';
+        try {
+            const parts = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).formatToParts(d);
+            const get = (t) => (parts.find(p => p.type === t) || {}).value || '00';
+            return `${get('year')}-${get('month')}-${get('day')} ${get('hour')}:${get('minute')}:${get('second')}`;
+        } catch (e) { return d.toISOString().replace('T', ' ').substring(0, 19); }
+    };
 
     const now = new Date();
     const opDateStr = formatDateTime(now); // 操作日期：始终为当前时间
@@ -2027,7 +2061,7 @@ const openRenew = (row) => {
 
         // 农历计算逻辑
         if (row.useLunar) {
-            const l = LUNAR.solar2lunar(sDate.getFullYear(), sDate.getMonth() + 1, sDate.getDate());
+            const l = LUNAR.solar2lunar(sDate.getUTCFullYear(), sDate.getUTCMonth() + 1, sDate.getUTCDate());
             if (l) {
                 const nextL = frontendCalc.addPeriod({ year: l.year, month: l.month, day: l.day, isLeap: l.isLeap }, row.intervalDays, row.cycleUnit || 'day');
                 const nextS = frontendCalc.l2s(nextL);
@@ -2036,12 +2070,12 @@ const openRenew = (row) => {
         }
         // 公历计算逻辑
         else {
-            const d = new Date(sDate);
+            const d = new Date(sDate.getTime());
             const u = row.cycleUnit || 'day';
             const n = row.intervalDays;
-            if (u === 'year') d.setFullYear(d.getFullYear() + n);
-            else if (u === 'month') d.setMonth(d.getMonth() + n);
-            else d.setDate(d.getDate() + n);
+            if (u === 'year') d.setUTCFullYear(d.getUTCFullYear() + n);
+            else if (u === 'month') d.setUTCMonth(d.getUTCMonth() + n);
+            else d.setUTCDate(d.getUTCDate() + n);
             end = formatDate(d);
         }
     }
@@ -2128,7 +2162,7 @@ const submitRenew = async () => {
             // 添加记录后按 endDate 降序排序（最新的在前）
             const history = currentHistoryItem.value.renewHistory;
             history.push(historyRecord);
-            history.sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+            history.sort((a, b) => (b.endDate || '').localeCompare(a.endDate || ''));
 
             // 同步到主列表并保存
             const realRow = list.value.find(i => i.id === currentHistoryItem.value.id);
@@ -2216,17 +2250,13 @@ const addHistoryForm = ref({ renewDate: '', startDate: '', endDate: '', price: 0
 // Check for period overlap
 const checkPeriodOverlap = (startDate, endDate, excludeIndex = -1) => {
     if (!startDate || !endDate) return { overlap: false };
-    const newStart = new Date(startDate);
-    const newEnd = new Date(endDate);
     const history = currentHistoryItem.value.renewHistory || [];
 
     for (let i = 0; i < history.length; i++) {
         if (i === excludeIndex) continue;
         if (!history[i].startDate || !history[i].endDate) continue;
-        const existStart = new Date(history[i].startDate);
-        const existEnd = new Date(history[i].endDate);
         // Overlap: newStart < existEnd && newEnd > existStart (允许边界相等，即前一账单结束日=后一账单开始日)
-        if (newStart < existEnd && newEnd > existStart) {
+        if (startDate < history[i].endDate && endDate > history[i].startDate) {
             return { overlap: true, index: i, record: history[i] };
         }
     }
@@ -2255,12 +2285,18 @@ watch(() => renewForm.value.startDate, (newVal) => {
 // Open Add History via Renew Dialog (reuse)
 const addHistoryRecord = () => {
     const now = new Date();
-    const formatDateTime = (d) => d.getFullYear() + '-' + (d.getMonth() + 1).toString().padStart(2, '0') + '-' + d.getDate().toString().padStart(2, '0') + ' ' + d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0') + ':' + d.getSeconds().toString().padStart(2, '0');
+    const tz = settings.value?.timezone || 'UTC';
+    let opDateStr;
+    try {
+        const parts = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).formatToParts(now);
+        const get = (t) => (parts.find(p => p.type === t) || {}).value || '00';
+        opDateStr = `${get('year')}-${get('month')}-${get('day')} ${get('hour')}:${get('minute')}:${get('second')}`;
+    } catch (e) { opDateStr = now.toISOString().replace('T', ' ').substring(0, 19); }
     const d = getLocalToday();
     renewForm.value = {
         id: currentHistoryItem.value.id, // Use currentHistoryItem's id for addHistory mode 
         name: currentHistoryItem.value.name,
-        renewDate: formatDateTime(now),
+        renewDate: opDateStr,
         startDate: d,
         endDate: calculateCycleEndDate(d, currentHistoryItem.value) || d,
         price: currentHistoryItem.value.fixedPrice || 0,
@@ -4041,6 +4077,8 @@ const openLink = (url) => { if (url) window.open(url, '_blank'); };
 
                     <el-form-item :label="t('note')"><el-input v-model="form.message" type="textarea"
                             rows="2"></el-input></el-form-item>
+                    <el-form-item :label="t('renewUrl')"><el-input v-model="form.renewUrl"
+                            :placeholder="t('renewUrlPlaceholder')" clearable></el-input></el-form-item>
                 </el-form>
 
                 <template #footer>
@@ -4555,8 +4593,17 @@ const openLink = (url) => { if (url) window.open(url, '_blank'); };
                     </el-form-item>
                 </el-form>
                 <template #footer>
-                    <el-button @click="renewDialogVisible = false">{{ t('cancel') }}</el-button>
-                    <el-button type="primary" @click="submitRenew" :loading="submitting">{{ t('yes') }}</el-button>
+                    <div class="flex justify-between items-center w-full">
+                        <div>
+                            <el-tooltip v-if="currentRenewItem.renewUrl" :content="currentRenewItem.renewUrl" placement="top" :hide-after="0">
+                                <el-button type="warning" @click="openRenewUrl(currentRenewItem.renewUrl)">{{ t('goRenew') }}</el-button>
+                            </el-tooltip>
+                        </div>
+                        <div class="flex gap-2">
+                            <el-button @click="renewDialogVisible = false">{{ t('cancel') }}</el-button>
+                            <el-button type="primary" @click="submitRenew" :loading="submitting">{{ t('yes') }}</el-button>
+                        </div>
+                    </div>
                 </template>
             </el-dialog>
 

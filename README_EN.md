@@ -2,6 +2,7 @@
 
 **[English]** | [中文](./README.md)
 
+![Docker Pulls](https://img.shields.io/docker/pulls/ieax/renewhelper?logo=docker)
 ![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-orange?logo=cloudflare)
 ![Vue.js](https://img.shields.io/badge/Frontend-Vue3%20%2B%20ElementPlus-42b883?logo=vue.js)
 ![License](https://img.shields.io/badge/License-MIT-blue)
@@ -257,6 +258,13 @@ docker compose up -d
 Your service will be available at `https://your-domain.com`.
 </details>
 
+#### ⚠️ Important: Timezone Alignment
+
+To ensure reminders are triggered at the correct moment, please keep **both** of the following settings consistent:
+
+1. **Docker Environment Variable (`TZ`)** – controls when RenewHelper “wakes up” to run the cron job.
+2. **Web UI → Settings → Timezone** – controls what time RenewHelper thinks it is once it wakes up.
+
 #### 💾 Data Management
 
   * **Location**: All data (subscriptions, settings, logs) is stored in the `./data` directory in the same folder as your `docker-compose.yml`.
@@ -274,6 +282,23 @@ docker compose pull
 # 2. Recreate the container
 docker compose up -d
 ```
+
+### Telegram Proxy Service (Optional)
+
+> ⚠️ **For mainland China users**: due to network restrictions, servers located in China may be unable to reach the Telegram API. You can deploy the lightweight proxy shipped with this project. It works with Workers/Pages/Snippets (priority: Snippets > Pages > Workers).
+
+1. **Prepare the file**: copy the code from `renewhelper/telegram_proxy/_worker.js`.
+2. **Create a Worker/Pages/Snippets service**:
+   - In the Cloudflare dashboard create a new Worker/Pages/Snippet (e.g., `tg-proxy`).
+   - Paste the code and deploy.
+3. **Configure whitelist (`TG_ALLOW_TOKENS`)**:
+   - In Settings → Variables add `TG_ALLOW_TOKENS` (for Pages redeploy after change).
+   - The value should contain the bot tokens you allow (comma separated).  
+     *If you don't want to use environment variables, edit the `WHITELIST_TOKENS` constant in code instead.*
+4. **Usage**:
+   - Your proxy endpoint will be `https://tg-proxy.your-subdomain.workers.dev` or any custom domain you bind.
+   - It can act as a transparent proxy for Telegram APIs, supporting `POST /bot<Token>/<Method>` requests.
+   - *This helper exists purely to solve environments where Docker deployments cannot reach Telegram directly.*
 
 ### 🎉 Deployment Complete!
 
@@ -332,6 +357,8 @@ In the "Settings" -> "Notifications" section, click the **Add Channel** button, 
 - **Automation Policy**:
   - **Auto-Renew**: Automatically extends the next due date by one cycle upon expiration.
   - **Auto-Disable**: Automatically marks the service as disabled if it remains overdue for a specified number of days.
+- **Renew Link**:
+  - Optional. When filled, a “Renew” button appears in the manual renewal dialog so you can quickly jump to the payment/renewal page.
 
 ### Batch Operations
 In the project list view, you can check the checkboxes on the left side of the list to perform **batch deletion**, **batch pause/enable**, and the highly practical **batch assign notification channels** function (quickly bind the same push channels to a group of services).

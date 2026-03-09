@@ -71,8 +71,8 @@ const LUNAR_DATA = {
         // 2. 命中缓存直接返回
         if (_lunarCache.has(cacheKey)) return _lunarCache.get(cacheKey);
         if (y < 1900 || y > 2100) return null;
-        const base = new Date(1900, 0, 31),
-            obj = new Date(y, m - 1, d);
+        const base = new Date(Date.UTC(1900, 0, 31)),
+            obj = new Date(Date.UTC(y, m - 1, d));
         let offset = Math.round((obj - base) / 86400000);
         let ly = 1900,
             temp = 0;
@@ -627,73 +627,174 @@ const Calc = {
 
     // 核心：处理复杂自然周期 (RRULE 变体) 下一次执行日推断
     calcNextRepeatDate(repeat, rDateStr, cDateStr) {
+        if (!repeat) return null;
+
         const dtstart = this.parseYMD(cDateStr || rDateStr);
         const baseObj = this.parseYMD(rDateStr);
+        if (!dtstart || Number.isNaN(dtstart.getTime()) || !baseObj || Number.isNaN(baseObj.getTime())) {
+            return null;
+        }
+
         const freq = repeat.freq || "monthly";
         const interval = Math.max(1, Number(repeat.interval) || 1);
 
-        // 强制转换为数组格式，若是空数组返回 null
-        const toArr = (v) => (Array.isArray(v) && v.length > 0) ? v : ((v !== undefined && v !== null && !Array.isArray(v)) ? [v] : null);
-        let bymonthday = toArr(repeat.bymonthday);
-        let byweekday = toArr(repeat.byweekday);
-        let bymonth = toArr(repeat.bymonth);
+        const toArr = (v) =>
+            Array.isArray(v) && v.length > 0
+                ? v
+                : v !== undefined && v !== null && !Array.isArray(v)
+                    ? [v]
+                    : null;
+
+        const sanitize = (list, predicate) => {
+            if (!list) return null;
+            const filtered = list
+                .map((val) => Number(val))
+                .filter((num) => Number.isFinite(num) && predicate(num));
+            return filtered.length ? filtered : null;
+        };
+
+        let bymonthday = sanitize(toArr(repeat.bymonthday), (n) => n !== 0 && n >= -31 && n <= 31);
+        let byweekday = sanitize(toArr(repeat.byweekday), (n) => n >= 0 && n <= 6);
+        let bymonth = sanitize(toArr(repeat.bymonth), (n) => n >= 1 && n <= 12);
         let bysetpos = repeat.bysetpos;
-
-        // 未指定任何具体定点修饰物时，取 dtstart 作为缺省值
-        if (!bymonthday && !byweekday && !bysetpos) {
-            if (freq === 'monthly' || freq === 'yearly') bymonthday = [dtstart.getUTCDate()];
-            if (freq === 'weekly') byweekday = [dtstart.getUTCDay()];
+        if (bysetpos !== undefined && bysetpos !== null) {
+            const parsed = Number(bysetpos);
+            bysetpos = Number.isFinite(parsed) && Math.abs(parsed) <= 366 ? parsed : null;
+        } else {
+            bysetpos = null;
         }
-        if (freq === 'yearly' && !bymonth) bymonth = [dtstart.getUTCMonth() + 1];
 
-        // 向前跨周期探测最近的触点
+        let bycycleday = sanitize(
+            toArr(repeat.bycycleday),
+            (n) => n >= 1 && n <= interval
+        );
+
+        if (!bymonthday && !byweekday && bysetpos === null) {
+            if (freq === "monthly" || freq === "yearly") bymonthday = [dtstart.getUTCDate()];
+            if (freq === "weekly") byweekday = [dtstart.getUTCDay()];
+        }
+        if (freq === "yearly" && !bymonth) bymonth = [dtstart.getUTCMonth() + 1];
+
         for (let periods = 0; periods < 100; periods++) {
             let candidates = [];
-            let y = dtstart.getUTCFullYear(), m = dtstart.getUTCMonth(), d = dtstart.getUTCDate();
+            const y0 = dtstart.getUTCFullYear();
+            const m0 = dtstart.getUTCMonth();
+            const d0 = dtstart.getUTCDate();
 
-            if (freq === 'yearly') {
-                y += periods * interval;
-                let mList = bymonth || [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-                for (let testM of mList) candidates.push(...this.generateMonthCandidates(y, testM - 1, bymonthday, byweekday, bysetpos));
-            } else if (freq === 'monthly') {
-                let tm = m + periods * interval;
-                candidates.push(...this.generateMonthCandidates(y + Math.floor(tm / 12), tm % 12, bymonthday, byweekday, bysetpos));
-            } else if (freq === 'weekly') {
-                let wStart = new Date(Date.UTC(y, m, d + (periods * interval * 7)));
-                // 退回到那一周的周一 (国际标准 ISO 8601)
-                let dayOfWeek = wStart.getUTCDay();
-                let diffToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
-                let mon = new Date(Date.UTC(wStart.getUTCFullYear(), wStart.getUTCMonth(), wStart.getUTCDate() - diffToMonday));
-                for (let i = 0; i < 7; i++) {
-                    let curr = new Date(Date.UTC(mon.getUTCFullYear(), mon.getUTCMonth(), mon.getUTCDate() + i));
-                    if (!byweekday || byweekday.includes(curr.getUTCDay())) candidates.push(curr);
+            if (freq === "yearly") {
+                let y = y0 + periods * interval;
+                const monthList = bymonth || [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+                for (let testM of monthList) {
+                    candidates.push(
+                        ...this.generateMonthCandidates(y, testM - 1, bymonthday, byweekday, bysetpos)
+                    );
                 }
-            } else if (freq === 'daily') {
-                let bycycleday = Array.isArray(repeat.bycycleday) ? repeat.bycycleday : (repeat.bycycleday ? [repeat.bycycleday] : null);
-                if (bycycleday && bycycleday.length > 0) {
-                    let cycleStart = new Date(Date.UTC(y, m, d + periods * interval));
+            } else if (freq === "monthly") {
+                let tm = m0 + periods * interval;
+                candidates.push(
+                    ...this.generateMonthCandidates(
+                        y0 + Math.floor(tm / 12),
+                        ((tm % 12) + 12) % 12,
+                        bymonthday,
+                        byweekday,
+                        bysetpos
+                    )
+                );
+            } else if (freq === "weekly") {
+                const wStart = new Date(Date.UTC(y0, m0, d0 + periods * interval * 7));
+                const dayOfWeek = wStart.getUTCDay();
+                const diffToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+                const mon = new Date(
+                    Date.UTC(
+                        wStart.getUTCFullYear(),
+                        wStart.getUTCMonth(),
+                        wStart.getUTCDate() - diffToMonday
+                    )
+                );
+                for (let i = 0; i < 7; i++) {
+                    const curr = new Date(
+                        Date.UTC(mon.getUTCFullYear(), mon.getUTCMonth(), mon.getUTCDate() + i)
+                    );
+                    if (!byweekday || byweekday.includes(curr.getUTCDay())) {
+                        candidates.push(curr);
+                    }
+                }
+            } else if (freq === "daily") {
+                if (bycycleday) {
+                    const cycleStart = new Date(Date.UTC(y0, m0, d0 + periods * interval));
                     for (let bd of bycycleday) {
-                        let dayOffset = Number(bd) - 1;
-                        if (dayOffset >= 0 && dayOffset < interval) {
-                            candidates.push(new Date(Date.UTC(cycleStart.getUTCFullYear(), cycleStart.getUTCMonth(), cycleStart.getUTCDate() + dayOffset)));
+                        const offset = Number(bd) - 1;
+                        if (offset >= 0 && offset < interval) {
+                            candidates.push(
+                                new Date(
+                                    Date.UTC(
+                                        cycleStart.getUTCFullYear(),
+                                        cycleStart.getUTCMonth(),
+                                        cycleStart.getUTCDate() + offset
+                                    )
+                                )
+                            );
                         }
                     }
                 } else {
-                    candidates.push(new Date(Date.UTC(y, m, d + periods * interval)));
+                    candidates.push(new Date(Date.UTC(y0, m0, d0 + periods * interval)));
                 }
             }
 
-            // 选出严格大于 baseObj (上次执行点) 的候选日
-            candidates = candidates.filter(cd => cd > baseObj);
+            candidates = candidates.filter((cd) => cd > baseObj);
             if (candidates.length > 0) {
                 candidates.sort((a, b) => a.getTime() - b.getTime());
                 return candidates[0];
             }
         }
-        // 无法找到匹配日期
         return null;
     }
 };
+
+function repeatFallbackAdvance(anchorDate, repeat = {}) {
+    const safeDate = new Date(anchorDate.getTime());
+    const freq = repeat.freq || "monthly";
+    const step = Math.max(1, Number(repeat.interval) || 1);
+
+    switch (freq) {
+        case "daily":
+            safeDate.setUTCDate(safeDate.getUTCDate() + step);
+            break;
+        case "weekly":
+            safeDate.setUTCDate(safeDate.getUTCDate() + step * 7);
+            break;
+        case "yearly":
+            safeDate.setUTCFullYear(safeDate.getUTCFullYear() + step);
+            break;
+        default:
+            safeDate.setUTCMonth(safeDate.getUTCMonth() + step);
+            break;
+    }
+    return safeDate;
+}
+
+function resolveRepeatNextDate(repeat, rDateStr, cDateStr, contextTag = "repeat") {
+    if (!repeat) return null;
+    try {
+        const next = Calc.calcNextRepeatDate(repeat, rDateStr, cDateStr);
+        if (next) return next;
+    } catch (err) {
+        console.warn(`[RepeatRule] ${contextTag} calculation error: ${err.message}`);
+    }
+
+    const anchor = Calc.parseYMD(rDateStr);
+    if (Number.isNaN(anchor.getTime())) {
+        const fallback = repeatFallbackAdvance(Calc.parseYMD(Calc.toYMD(new Date())), repeat);
+        console.warn(`[RepeatRule] ${contextTag} anchor invalid, fallback to ${Calc.toYMD(fallback)}`);
+        return fallback;
+    }
+
+    const fallbackDate = repeatFallbackAdvance(anchor, repeat);
+    console.warn(
+        `[RepeatRule] ${contextTag} fallback triggered, please check RRULE config: ${JSON.stringify(repeat)}`
+    );
+    return fallbackDate;
+}
 
 // HTML转义工具
 const escapeHtml = (unsafe) => {
@@ -970,8 +1071,7 @@ function calculateStatus(item, timezone = "UTC") {
         // ============================================================
         // 1. 对于固定自然重复 (Repeat) 服务，严格遵循 RRULE 推算算法引擎
         // ============================================================
-        nextObj = Calc.calcNextRepeatDate(item.repeat, rDate, cDate);
-
+        nextObj = resolveRepeatNextDate(item.repeat, rDate, cDate, `calculateStatus:${item.id || item.name || 'unknown'}`);
     } else if (hasHistory) {
         // ============================================================
         // 2. 对于普通按量倒数服务：优先使用续费历史中的 EndDate 作为下次到期日
@@ -1155,7 +1255,7 @@ async function checkAndRenew(env, isSched, lang = "zh") {
 
     for (let i = 0; i < items.length; i++) {
         let it = items[i];
-        if (!it.createDate) it.createDate = Calc.toYMD(new Date());
+        if (!it.createDate) it.createDate = Calc.toYMD(Calc.getTzToday(s.timezone));
         if (!it.lastRenewDate) it.lastRenewDate = it.createDate;
         if (it.enabled === false) continue;
 
@@ -1229,7 +1329,7 @@ async function checkAndRenew(env, isSched, lang = "zh") {
 
             if (it.type === 'repeat' && it.repeat && it.repeat.freq) {
                 // Repeat 类型特有逻辑: 结合基准日期直接向前推算下一次发生日
-                const nextD = Calc.calcNextRepeatDate(it.repeat, startStr, it.createDate);
+                const nextD = resolveRepeatNextDate(it.repeat, startStr, it.createDate, `autoRenew:${it.id || it.name || 'unknown'}`);
                 endStr = Calc.toYMD(nextD);
             } else if (it.useLunar) {
                 const l = LUNAR_DATA.solar2lunar(sDate.getUTCFullYear(), sDate.getUTCMonth() + 1, sDate.getUTCDate());
@@ -1585,7 +1685,16 @@ app.post(
                 currency: i.currency || 'CNY',
                 notifyChannelIds: Array.isArray(i.notifyChannelIds) ? i.notifyChannelIds : [],
                 renewHistory: Array.isArray(i.renewHistory) ? i.renewHistory : [],
+                renewUrl: typeof i.renewUrl === 'string' ? i.renewUrl.trim() : '',
             };
+
+            if (cleanItem.renewUrl) {
+                const safeUrl = cleanItem.renewUrl.trim();
+                if (!/^https?:\/\/.+/i.test(safeUrl)) {
+                    throw new Error("INVALID_RENEW_URL: Only http/https links are allowed");
+                }
+                cleanItem.renewUrl = safeUrl;
+            }
 
             // 【核心修复】在保存前，使用后端逻辑重新计算 nextDueDate 等字段
             // 确保存入 KV/数据库 的数据永远是基于当前历史记录计算出的最新状态
@@ -1605,6 +1714,9 @@ app.post(
         } catch (e) {
             if (e.message === "VERSION_CONFLICT") {
                 return error("DATA_CHANGED_RELOAD_REQUIRED", 409);
+            }
+            if (typeof e.message === "string" && e.message.startsWith("INVALID_RENEW_URL")) {
+                return error(e.message, 400);
             }
             throw e;
         }
@@ -1808,7 +1920,7 @@ app.get("/api/calendar.ics", async (req, env, url) => {
         // 计算结束时间 (DTSTART + 1天) 以符合全天事件规范
         const startDateObj = Calc.parseYMD(st.nextDueDate);
         const endDateObj = new Date(startDateObj);
-        endDateObj.setDate(endDateObj.getDate() + 1);
+        endDateObj.setUTCDate(endDateObj.getUTCDate() + 1);
         const endStr = Calc.toYMD(endDateObj).replace(/-/g, "");
 
         parts.push("BEGIN:VEVENT");

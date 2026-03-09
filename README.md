@@ -2,6 +2,7 @@
 
 [English](./README_EN.md) | **中文**
 
+![Docker Pulls](https://img.shields.io/docker/pulls/ieax/renewhelper?logo=docker)
 ![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-orange?logo=cloudflare)
 ![Vue.js](https://img.shields.io/badge/Frontend-Vue3%20%2B%20ElementPlus-42b883?logo=vue.js)
 ![License](https://img.shields.io/badge/License-MIT-blue)
@@ -357,6 +358,8 @@ docker compose up -d
 - **自动化策略**：
   - **自动续期**：到期后自动将下次到期日顺延一个周期。
   - **自动禁用**：到期超过指定天数未处理，自动标记为禁用。
+- **续费链接**：
+  - 可选，填写后在手动续期页面中会出现“去续期”按钮，帮助用户快速跳转至目标网站进行续期操作。  
 
 ### 批量操作
 在项目列表视图，您可以勾选列表左侧的复选框，进行多项服务的**批量删除**、**批量暂停/启用**检查，以及最为实用的**批量分配通知渠道**功能（快速为一组服务绑定相同的推送通道）。
